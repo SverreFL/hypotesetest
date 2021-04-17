@@ -5,7 +5,6 @@ dette handler om namespace.. hvor er det funksjon søker over... der den blir de
 import numpy as np
 import matplotlib.pyplot as plt
 import panel as pn; pn.extension()
-import seaborn as sns
 from scipy import stats
 from scipy.integrate import quad
 # utilities
