@@ -2,3 +2,4 @@ panel
 matplotlib
 scipy
 numpy
+nbconvert
