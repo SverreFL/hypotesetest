@@ -1,0 +1,8 @@
+Fordelingen til utvalgsgjennomsnittet er $\bar{X}\sim N\left(\mu,\frac{\sigma^2}{n}\right)$. Dette medfører avviket mellom utvalgsgjennomsnittet og forventningsverdien har fordelingen $(\bar{X}-\mu)\sim N\left(0,\frac{\sigma^2}{n}\right)$, der vi kan betegne avviket som $\bar{X}-\mu:=\hat{\gamma}$. Det følger at $\bar{X}=\mu+\hat{\gamma}$.
+
+Nullhypotesen er $H_0: \mu=\mu_0$. Testobservatoren $T=\frac{\bar{X}-\mu_0}{\sigma/\sqrt{n}}\sim N(0,1)$ når nullhypotsen er riktig. Mer generelt har den fordelingen
+\begin{align*}
+T&=\frac{\bar{X}-\mu_0}{\sigma/\sqrt{n}} \\ 
+&=\frac{\mu+\hat{\gamma}-\mu_0}{\sigma/\sqrt{n}} \\
+&=\frac{\mu-\mu_0}{\sigma/\sqrt{n}}+ \frac{\hat{\gamma}}{\sigma/\sqrt{n}} \sim N\left(\frac{\mu-\mu_0}{\sigma/\sqrt{n}},1\right)
+\end{align*}

@@ -21,30 +21,30 @@ def make_power_grid(μ_hyp, σ_true, N,  t_lower, t_upper):
     
     power_grid = np.empty(len(μ_grid))
     for i in range(len(μ_grid)):
-        dist = stats.norm(loc=μ_grid[i]-μ_hyp, scale=σ_true/np.sqrt(N)).pdf
+        dist = stats.norm(loc=(μ_grid[i]-μ_hyp)/(σ_true/np.sqrt(N)), scale=1).pdf
         power_grid[i] = power(dist, t_lower, t_upper)
     return μ_grid, power_grid
 
 def make_power_val(μ_hyp, μ_true, σ_true, N,  t_lower, t_upper):
-    dist = stats.norm(loc=μ_true-μ_hyp, scale=σ_true/np.sqrt(N)).pdf
+    dist = stats.norm(loc=(μ_true-μ_hyp)/(σ_true/np.sqrt(N)), scale=1).pdf
     power_val = power(dist, t_lower, t_upper)
     return power_val
 
 # plot functions
 def make_plot0(test_dist_true, test_dist_hyp, t_lower, t_upper, ax):
     
-    grid = np.linspace(-2,2, num=200)
+    grid = np.linspace(-3.5,3.5, num=200)
     ax.plot(grid, test_dist_hyp.pdf(grid), linewidth=2, label='nullhypotese')
     ax.plot(grid, test_dist_true.pdf(grid), linewidth=2, label=r'sann $\mu$')
     ax.hlines(0, t_lower, t_upper, color='black')
-    ax.vlines(t_lower, -0.05, 0.05, color='black')
-    ax.vlines(t_upper, -0.05, 0.05, color='black')
+    ax.vlines(t_lower, -0.01, 0.01, color='black')
+    ax.vlines(t_upper, -0.01, 0.01, color='black')
     ax.fill_between(np.linspace(t_lower, t_upper),0, 
                     test_dist_true.pdf(np.linspace(t_lower, t_upper)),
                     color='tab:orange', alpha=.5)
     
-    ax.set(xlim=(-2.05, 2.05), ylim=(-0.05,2.5), xlabel='Verdi til testobservator',
-           xticks=np.arange(-2,2+1))
+    ax.set(xlim=(-3.55, 3.55), ylim=(-0.01,0.65), xlabel='Verdi til testobservator',
+           xticks=np.arange(-3, 3+1))
     ax.legend(title=r'Fordeling der $\mu$ tilsvarer',
               framealpha=0)
     ax.title.set_text('Fordeling til testobservatorer')                
@@ -56,15 +56,16 @@ def make_plot1(μ_hyp, μ_true,σ_true, N,  t_lower, t_upper,α, ax):
     
     ax.plot(μ_grid, power_grid, color='black')
     ax.scatter(μ_true, power_val, color='tab:orange', s=100)
-    ax.set(xlim=(-2.05, 2.05), ylim = (-.05, 1.05), xlabel=r'Sann $\mu$', ylabel='Styrke',
-          xticks=np.arange(-2,2+1))
+    ax.set(xlim=(-1.05, 1.05), ylim = (-.01, 1.05), xlabel=r'Sann forventningsverdi', ylabel='Styrke',
+          xticks=[-1, -0.5, 0, 0.5, 1])
     ax.title.set_text(r'Styrke, 1-P(type-II feil), som funksjon av sann $\mu$')
     return ax
     
 def make_plot(μ_true, σ_true, μ_hyp, N, α):
-    dist_true = stats.norm(loc=μ_true, scale=σ_true)
-    test_dist_hyp = stats.norm(loc=0, scale=σ_true/np.sqrt(N))
-    test_dist_true = stats.norm(loc=μ_true-μ_hyp, scale=σ_true/np.sqrt(N))
+    
+    dist_true = stats.norm(loc=μ_true, scale=σ_true) # trenger jeg dette?
+    test_dist_hyp = stats.norm(loc=0, scale=1)
+    test_dist_true = stats.norm(loc=(μ_true-μ_hyp)/(σ_true/np.sqrt(N)), scale=1)
     t_lower, t_upper = get_critical_values(test_dist_hyp, α, μ_true, μ_hyp)
     
     fig, axes = plt.subplots(1,2, figsize=(14,6))

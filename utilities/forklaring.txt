@@ -1,4 +1,4 @@
-####Forklaring:
+#### Forklaring:
 Testen medfører en partisjonering av utfallsmengden til testobservatoren i en *forkastningsmengde* og en *ikke-forkastningsmengde*. Det er to fordelinger til testobservatoren: den kjente (men i praksis usanne) fordelingen der nullhypotesen er riktig og den sanne (men ukjente) fordelingen som faktisk genererer testobervatoren vi observerer. Sannsynligheten for vi unnlater å forkaste nullhypotesen tilsvarer sannsynligheten for at testobservatoren havner i ikke-forkastningsmengden. I spesialtilfelle der nullhypotesen er riktig vil dette tilsvare 1-nivå. Mer generelt vil det avhenge av overlappet mellom den sanne fordelingen til testobservatoren og ikke-forkastningsmengden. Sannsynligheten for en slik type-II feil tilsvarer arealet av området som er skravert og avhenger av:
 
 1. Forskjellen mellom nullhypotese og sann gjennomsnitt
